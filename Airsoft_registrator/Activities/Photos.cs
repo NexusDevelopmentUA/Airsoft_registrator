@@ -52,20 +52,21 @@ namespace Airsoft_registrator.Activities
                 btn = new Button(this);
                 btn.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
                 btn.Text = "Download";
+                btn.Click+=(sender,e)=>Btn_Click(sender,e, item);//lambda expression
                 tr.AddView(btn);
 
                 tl.AddView(tr, lparams);
                 tl.AddView(view);
             }
 
-            btn.Click += Btn_Click;
+            
         }
 
-        private void Btn_Click(object sender, EventArgs e)
+        private void Btn_Click(object sender, EventArgs e, string input)
         {
             Console.WriteLine("HELLO");
             Toast.MakeText(this, "HELLO", ToastLength.Short);
-            string query = "SELECT link FROM photos WHERE name = '"+tv.Text+"';";
+            string query = "SELECT link FROM photos WHERE name = '"+input+"';";
             string link = MySQL.MySQL_repository.MySQLselect_string(query);
             if (!link.StartsWith("http"))
             {
