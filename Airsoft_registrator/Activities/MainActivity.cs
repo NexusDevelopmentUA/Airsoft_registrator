@@ -18,6 +18,13 @@ namespace Airsoft_registrator
     [Activity(Label = "Ігри", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
+        
+        TableLayout tl;
+        //List<String> locations;
+        //List<String> dates;
+        //List<String> id;
+        List<Structure> games_info;
+
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
@@ -31,57 +38,42 @@ namespace Airsoft_registrator
 
         private void GetAllRecords()
         {
-            View view = new View(this);
-            view.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.MatchParent, 2);
-            view.SetBackgroundColor(Color.Black);
-            TableRow tr = new TableRow(this);
-            TextView txtview = new TextView(this);
-            Button reg_btn = new Button(this);
+            games_info = MySQL_repository.MySQLselect_games("SELECT * FROM games");
+            Console.WriteLine(games_info.Count);
+            tl = FindViewById<TableLayout>(Resource.Id.tableLayout1);
+            
+            foreach(var game in games_info)
+            {
+                Button reg_btn = new Button(this);
+                TextView tv = new TextView(this);
+                View view = new View(this);
+                TableRow tr = new TableRow(this);
 
-            List<String> id = MySQL_repository.MySQLselect("SELECT idgames FROM games");
-            List<String> locations = MySQL.MySQL_repository.MySQLselect("SELECT location, time FROM games");
-            List<String> dates = MySQL_repository.MySQLselect("SELECT time FROM games");
-            TableLayout tablelayout = FindViewById<TableLayout>(Resource.Id.tableLayout1);
-            tablelayout.RemoveAllViews();
-            tr.RemoveAllViews();
-            for (int i = id.Count-1; i>=0; i--)
-                {
-                //        
-                //{
-                    
-                //    //((ViewGroup)tr.Parent).RemoveView(tr);
-                //    //((ViewGroup)tablelayout.Parent).RemoveView(view);
-                //}
-                       
+                tr.LayoutParameters = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+                tv.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
+                reg_btn.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
 
+                tv.Text += "" + game.location + "           " + game.date + "         " + game.count_players;
+                tv.TextSize = 24;
 
-                        tr.LayoutParameters = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                        txtview.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                        reg_btn.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
+                reg_btn.Text = "Зареєструватись";
+                reg_btn.Click +=(sender, e)=> Reg_btn_Click(sender, e, game.id.ToString());
 
-                        txtview.Text += "" + locations[i];
-                        txtview.TextSize = 24;
-
-                        txtview.Text += "  " + dates[i]+"        ";
-                        txtview.TextSize = 24;
-
-                        reg_btn.Text = "Зареєструватись";
-
-                        tr.AddView(txtview);
-                        tr.AddView(reg_btn);
-                        tablelayout.AddView(tr);
-                        tablelayout.AddView(view);
-                        
-                }
-            //reg_btn.Click += Reg_btn_Click;
+                tr.AddView(tv);
+                tr.AddView(reg_btn);
+                tl.AddView(tr);
+            }
         }
 
-        private void Reg_btn_Click(object sender, EventArgs e)
+        private void Reg_btn_Click(object sender, EventArgs e, string id)
         {
-            //string query = "INSERT INTO games(players) VALUES('"
-            //int count = Int32.Parse(MySQL_repository.Players_count("SELECT count FROM games WHERE idgames= '"+FindViewById<Button>.sender"));
+            int count = Int32.Parse(MySQL_repository.MySQLquery("SELECT players FROM games WHERE idgames= '"+id+"'"));
+            count++;
+            string query = "UDPATE games set players='"+count+"' WHERE idgames='"+id+"'";
+
             Toast.MakeText(this, "Успішно зареєстровано", ToastLength.Short);
         }
+        
     }
 }
 

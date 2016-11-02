@@ -3,6 +3,7 @@ using System.Data;
 using System.Collections;
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
+using System.Linq;
 
 namespace Airsoft_registrator.MySQL
 {
@@ -58,22 +59,24 @@ namespace Airsoft_registrator.MySQL
         {
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
-            List<String> tmp = new List<string>();
+            List<string> tmp = new List<string>();
             string query = "input params and other stuff...";
             query = query_in;
-
+              
             try
             {
+                
                 MySqlCommand select = new MySqlCommand(query, con);
                 con.Open();
                 DataSet dset = new DataSet();
                 adapter.SelectCommand = select;
 
                 adapter.Fill(dset,"Main");
-                foreach(DataRow row in dset.Tables["Main"].Rows)
+                foreach (DataRow row in dset.Tables["Main"].Rows)
                 {
                     tmp.Add(row[0].ToString());
                 }
+
                 Console.WriteLine("Query successfully done!");
             }
             catch (Exception e)
@@ -106,6 +109,64 @@ namespace Airsoft_registrator.MySQL
             }
             con.Close();
             return (result);
+        }
+
+        public static List<Structure> MySQLselect_games(string query_in)
+        {
+            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            List<Structure> games_info = new List<Structure>();
+            Structure game_info_row = new Structure();
+            string query = "input params and other stuff...";
+            query = query_in;
+
+            try
+            {
+
+                MySqlCommand select = new MySqlCommand(query, con);
+                con.Open();
+                DataSet dset = new DataSet();
+                adapter.SelectCommand = select;
+
+                adapter.Fill(dset, "Main");
+                foreach (DataRow row in dset.Tables["Main"].Rows)
+                {
+                    foreach(DataColumn column in dset.Tables["Main"].Columns)
+                    {
+                        switch(column.ColumnName)
+                        {
+                            case "idgames":
+                                {
+                                    game_info_row.id = row[column].ToString();
+                                    break;
+                                }
+                            case "location":
+                                {
+                                    game_info_row.location = row[column].ToString();
+                                    break;
+                                }
+                            case "time":
+                                {
+                                    game_info_row.date = row[column].ToString();
+                                    break;
+                                }
+                            case "players":
+                                {
+                                    game_info_row.count_players = row[column].ToString();
+                                    break;
+                                }
+                        }
+                    }
+                    games_info.Add(game_info_row);
+                }
+                Console.WriteLine("Query successfully done!");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            con.Close();
+            return (games_info);
         }
     }
 }
