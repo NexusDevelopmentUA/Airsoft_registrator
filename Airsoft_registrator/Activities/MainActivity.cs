@@ -40,6 +40,8 @@ namespace Airsoft_registrator
         {
             games_info = MySQL_repository.MySQLselect_games("SELECT * FROM games");
             Console.WriteLine(games_info.Count);
+            var tmp = games_info[0].id;
+            tmp = games_info[1].id;
             tl = FindViewById<TableLayout>(Resource.Id.tableLayout1);
             
             foreach(var game in games_info)
@@ -54,7 +56,7 @@ namespace Airsoft_registrator
                 reg_btn.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
 
                 tv.Text += "" + game.location + "           " + game.date + "         " + game.count_players;
-                tv.TextSize = 24;
+                tv.TextSize = 12;
 
                 reg_btn.Text = "Зареєструватись";
                 reg_btn.Click +=(sender, e)=> Reg_btn_Click(sender, e, game.id.ToString());
@@ -67,7 +69,9 @@ namespace Airsoft_registrator
 
         private void Reg_btn_Click(object sender, EventArgs e, string id)
         {
-            int count = Int32.Parse(MySQL_repository.MySQLquery("SELECT players FROM games WHERE idgames= '"+id+"'"));
+            string count_str = MySQL_repository.MySQLselect_string("SELECT players FROM games WHERE idgames= '" + id + "'");
+            Console.WriteLine(count_str);
+            int count = Int32.Parse(count_str);
             count++;
             string query = "UDPATE games set players='"+count+"' WHERE idgames='"+id+"'";
 

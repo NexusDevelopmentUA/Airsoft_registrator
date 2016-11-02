@@ -116,7 +116,6 @@ namespace Airsoft_registrator.MySQL
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             List<Structure> games_info = new List<Structure>();
-            Structure game_info_row = new Structure();
             string query = "input params and other stuff...";
             query = query_in;
 
@@ -127,7 +126,7 @@ namespace Airsoft_registrator.MySQL
                 con.Open();
                 DataSet dset = new DataSet();
                 adapter.SelectCommand = select;
-
+                string id = "", location = "", date = "", players = "";
                 adapter.Fill(dset, "Main");
                 foreach (DataRow row in dset.Tables["Main"].Rows)
                 {
@@ -137,27 +136,27 @@ namespace Airsoft_registrator.MySQL
                         {
                             case "idgames":
                                 {
-                                    game_info_row.id = row[column].ToString();
+                                    id = row[column].ToString();
                                     break;
                                 }
                             case "location":
                                 {
-                                    game_info_row.location = row[column].ToString();
+                                    location = row[column].ToString();
                                     break;
                                 }
                             case "time":
                                 {
-                                    game_info_row.date = row[column].ToString();
+                                    date = row[column].ToString();
                                     break;
                                 }
                             case "players":
                                 {
-                                    game_info_row.count_players = row[column].ToString();
+                                    players = row[column].ToString();
                                     break;
                                 }
                         }
                     }
-                    games_info.Add(game_info_row);
+                    games_info.Add(new Structure() { id = id, location = location, date = date, count_players = players });
                 }
                 Console.WriteLine("Query successfully done!");
             }
@@ -166,6 +165,8 @@ namespace Airsoft_registrator.MySQL
                 Console.WriteLine(e.Message);
             }
             con.Close();
+            //var tmp = games_info[0].id;
+            //tmp = games_info[1].id;
             return (games_info);
         }
     }
