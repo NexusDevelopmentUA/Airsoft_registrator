@@ -67,13 +67,18 @@ namespace Airsoft_registrator.Activities
             Toast.MakeText(this, "HELLO", ToastLength.Short);
             string query = "SELECT link FROM photos WHERE name = '"+tv.Text+"';";
             string link = MySQL.MySQL_repository.MySQLselect_string(query);
-            var uri = Android.Net.Uri.Parse(link);
-            var intent = new Intent(Intent.ActionView, uri);
-            WebView wview = new WebView(this);
+            if (!link.StartsWith("http"))
+            {
+                link = "http://" + link;
+            }
 
-            wview.Settings.JavaScriptEnabled = true;
-            wview.LoadUrl(link);
+            Android.Net.Uri uri = Android.Net.Uri.Parse(link);
+            Intent intent = new Intent(Intent.ActionView);
+            intent.SetData(uri);
 
+            Intent chooser = Intent.CreateChooser(intent, "Open with");
+
+            this.StartActivity(chooser);
         }
     }
 }
