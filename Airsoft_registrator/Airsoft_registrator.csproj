@@ -78,6 +78,7 @@
     <Compile Include="Activities\DialogSignUp.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\Photos.cs" />
+    <Compile Include="Activities\Photos_upload.cs" />
     <Compile Include="MySQL\MySQL_repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
@@ -97,6 +98,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\Photos.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\PhotosUpload.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

@@ -1540,6 +1540,9 @@ namespace Airsoft_registrator
 			// aapt resource value: 0x7f0b0058
 			public const int btnDialogEmail = 2131427416;
 			
+			// aapt resource value: 0x7f0b006b
+			public const int btn_PhotosUpload = 2131427435;
+			
 			// aapt resource value: 0x7f0b0051
 			public const int btn_sign_in = 2131427409;
 			
@@ -1777,6 +1780,15 @@ namespace Airsoft_registrator
 			// aapt resource value: 0x7f0b0057
 			public const int txtPassword = 2131427415;
 			
+			// aapt resource value: 0x7f0b0068
+			public const int txtUpload = 2131427432;
+			
+			// aapt resource value: 0x7f0b006a
+			public const int txt_link = 2131427434;
+			
+			// aapt resource value: 0x7f0b0069
+			public const int txt_name = 2131427433;
+			
 			// aapt resource value: 0x7f0b0052
 			public const int txt_or = 2131427410;
 			
@@ -1945,19 +1957,22 @@ namespace Airsoft_registrator
 			public const int Photos = 2130903076;
 			
 			// aapt resource value: 0x7f030025
-			public const int select_dialog_item_material = 2130903077;
+			public const int PhotosUpload = 2130903077;
 			
 			// aapt resource value: 0x7f030026
-			public const int select_dialog_multichoice_material = 2130903078;
+			public const int select_dialog_item_material = 2130903078;
 			
 			// aapt resource value: 0x7f030027
-			public const int select_dialog_singlechoice_material = 2130903079;
+			public const int select_dialog_multichoice_material = 2130903079;
 			
 			// aapt resource value: 0x7f030028
-			public const int splashscreen = 2130903080;
+			public const int select_dialog_singlechoice_material = 2130903080;
 			
 			// aapt resource value: 0x7f030029
-			public const int support_simple_spinner_dropdown_item = 2130903081;
+			public const int splashscreen = 2130903081;
+			
+			// aapt resource value: 0x7f03002a
+			public const int support_simple_spinner_dropdown_item = 2130903082;
 			
 			static Layout()
 			{

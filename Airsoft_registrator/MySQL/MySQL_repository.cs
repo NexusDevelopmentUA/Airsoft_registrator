@@ -14,7 +14,6 @@ namespace Airsoft_registrator.MySQL
         public static string MySQLcon()
         {
             string output = "";
-            string constr = "server=db4free.net;user id=bigroot;database=airsoft_rush;port=3306;password=bigroot";
             MySqlConnection con = new MySqlConnection(constring_db4free);
             try
             {
@@ -33,7 +32,6 @@ namespace Airsoft_registrator.MySQL
         public static string MySQLquery(string query_in)
         {
 
-            string constr = "server=localhost;user id=root;database=airsoft;port=3306;password=root";
             MySqlConnection con = new MySqlConnection(constring_db4free);
             string output = "";
             string query = "input params and other stuff...";
@@ -58,11 +56,9 @@ namespace Airsoft_registrator.MySQL
 
         public static List<String> MySQLselect(string query_in)
         {
-            string constr = "server=localhost;user id=root;database=airsoft;password=root";
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             List<String> tmp = new List<string>();
-            string output = "";
             string query = "input params and other stuff...";
             query = query_in;
 
@@ -78,7 +74,7 @@ namespace Airsoft_registrator.MySQL
                 {
                     tmp.Add(row[0].ToString());
                 }
-                Console.WriteLine(output = "Query successfully done!");
+                Console.WriteLine("Query successfully done!");
             }
             catch (Exception e)
             {
@@ -90,7 +86,6 @@ namespace Airsoft_registrator.MySQL
 
         public static string MySQLselect_string(string query_in)
         {
-            string constr = "server=db4free.net;user id=bigroot;database=airsoft_rush;port=3306;password=bigroot";
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             string result;
