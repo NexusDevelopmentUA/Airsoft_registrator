@@ -79,6 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\Authorisation.cs" />
+    <Compile Include="Activities\Create_Game.cs" />
     <Compile Include="Activities\DialogSignUp.cs" />
     <Compile Include="Activities\MainActivity.cs" />
     <Compile Include="Activities\Photos.cs" />
@@ -110,6 +111,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\PhotosMenu.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\CreateGame.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Menu.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

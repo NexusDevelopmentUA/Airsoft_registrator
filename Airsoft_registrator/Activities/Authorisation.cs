@@ -40,7 +40,7 @@ namespace Airsoft_registrator.Activities
         private void MButtonSignIn_Click(object sender, EventArgs e)
         {
             MySQL.MySQL_repository.MySQLcon();
-            StartActivity(typeof(MainActivity));
+            StartActivity(typeof(Photos_Menu));
         }
 
         private void SignupDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
