@@ -14,7 +14,7 @@ namespace Airsoft_registrator.Activities
 {
     class DialogSignUp:DialogFragment
     {
-        private EditText mTextCallSign, mTextTeam;
+        private EditText mTextCallSign, mTextTeam, mPass;
         private Button mSignUp;
 
         public event EventHandler<OnSignUpEventArgs> mOnSignUpComplete;
@@ -27,6 +27,7 @@ namespace Airsoft_registrator.Activities
 
             mTextCallSign = view.FindViewById<EditText>(Resource.Id.txtFirstName);
             mTextTeam = view.FindViewById<EditText>(Resource.Id.txtEmail);
+            mPass = view.FindViewById<EditText>(Resource.Id.txtPassword);
             mSignUp = view.FindViewById<Button>(Resource.Id.btnDialogEmail);
 
             mSignUp.Click += MSignUp_Click;
@@ -35,7 +36,7 @@ namespace Airsoft_registrator.Activities
 
         private void MSignUp_Click(object sender, EventArgs e)
         {
-            mOnSignUpComplete.Invoke(this, new OnSignUpEventArgs(mTextCallSign.Text, mTextTeam.Text));
+            mOnSignUpComplete.Invoke(this, new OnSignUpEventArgs(mTextCallSign.Text, mTextTeam.Text, mPass.Text));
             this.Dismiss();
         }
 
@@ -50,6 +51,7 @@ namespace Airsoft_registrator.Activities
     {
         private string mCallsign;
         private string mTeam;
+        private string mPass;
 
         public string Callsign
         {
@@ -63,10 +65,17 @@ namespace Airsoft_registrator.Activities
             set { mTeam = value; }
         }
 
-        public OnSignUpEventArgs(string callsign, string team):base()
+        public string Pass
+        {
+            get { return mPass; }
+            set { mPass = value; }
+        }
+
+        public OnSignUpEventArgs(string callsign, string team, string pass):base()
         {
             Callsign = callsign;
             Team = team;
+            Pass = pass;
         }
     }
 }

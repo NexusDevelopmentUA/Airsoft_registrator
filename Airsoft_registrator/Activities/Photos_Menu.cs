@@ -21,11 +21,11 @@ namespace Airsoft_registrator.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            Button upload = FindViewById<Button>(Resource.Id.btn_upload);
-            Button download = FindViewById<Button>(Resource.Id.btn_download);
+            //Button upload = FindViewById<Button>(Resource.Id.btn_upload);
+            //Button download = FindViewById<Button>(Resource.Id.btn_download);
 
-            upload.Click += Upload_Click;
-            download.Click += Download_Click;
+            //upload.Click += Upload_Click;
+            //download.Click += Download_Click;
         }
 
         private void Download_Click(object sender, EventArgs e)

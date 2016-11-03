@@ -70,11 +70,10 @@ namespace Airsoft_registrator
         private void Reg_btn_Click(object sender, EventArgs e, string id)
         {
             string count_str = MySQL_repository.MySQLselect_string("SELECT players FROM games WHERE idgames= '" + id + "'");
-            Console.WriteLine(count_str);
             int count = Int32.Parse(count_str);
             count++;
-            string query = "UDPATE games set players='"+count+"' WHERE idgames='"+id+"'";
-
+            string query = "UPDATE airsoft_rush.games SET games.players='"+count.ToString()+"' WHERE idgames='"+id+"';";
+            MySQL_repository.MySQLquery(query);
             Toast.MakeText(this, "Успішно зареєстровано", ToastLength.Short);
         }
         

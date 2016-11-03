@@ -9,14 +9,17 @@ namespace Airsoft_registrator.MySQL
 {
     class MySQL_repository
     {
+
         protected const string constring_db4free = "Server=db4free.net; Port=3306; Database=airsoft_rush; Uid=bigroot; Pwd=bigroot";
         protected const string constring_localhost = "Server=localhost; Port=3306; Database=airsoft7; Uid=root; Pwd=root;";
 
         public static string MySQLcon()
         {
+           
             string output = "";
             MySqlConnection con = new MySqlConnection(constring_db4free);
             try
+               
             {
                 con.Open();
                 output = "Success!";
@@ -37,7 +40,7 @@ namespace Airsoft_registrator.MySQL
             string output = "";
             string query = "input params and other stuff...";
             query = query_in;
-
+            int[] arr = new int[4] { 1, 2, 3, 4 };
             try
             {
                 con.Open();
@@ -164,9 +167,7 @@ namespace Airsoft_registrator.MySQL
             {
                 Console.WriteLine(e.Message);
             }
-            con.Close();
-            //var tmp = games_info[0].id;
-            //tmp = games_info[1].id;
+            con.Close();         
             return (games_info);
         }
     }

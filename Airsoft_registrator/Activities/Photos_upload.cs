@@ -34,7 +34,7 @@ namespace Airsoft_registrator.Activities
         private void Upload_Click(object sender, EventArgs e)
         {
             string query = "INSERT INTO photos(name,link) VALUES ('"+name.Text+"','"+link.Text+"')";
-            Toast.MakeText(this,MySQL.MySQL_repository.MySQLquery(query),ToastLength.Short);
+            MySQL.MySQL_repository.MySQLquery(query);
         }
     }
 }

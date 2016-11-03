@@ -64,8 +64,6 @@ namespace Airsoft_registrator.Activities
 
         private void Btn_Click(object sender, EventArgs e, string input)
         {
-            Console.WriteLine("HELLO");
-            Toast.MakeText(this, "HELLO", ToastLength.Short);
             string query = "SELECT link FROM photos WHERE name = '"+input+"';";
             string link = MySQL.MySQL_repository.MySQLselect_string(query);
             if (!link.StartsWith("http"))
