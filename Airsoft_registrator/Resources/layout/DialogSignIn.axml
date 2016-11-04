@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="#DEDEDC"
+    android:id="@+id/RelativeLayoutSignIn"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:minWidth="300dp"
     android:minHeight="400dp">
     <TextView
         android:text="Позивний"
+        android:layout_below="@id/RelativeLayoutSignIn"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:layout_width="match_parent"
         android:layout_height="35dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:textColor="#000"
@@ -57,7 +60,7 @@
             android:text="Sign In!"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnDialogEmail"
+            android:id="@+id/btnDialogSignIn"
             android:textSize="20dp"
             android:textColor="#fff"
             android:textStyle="bold"

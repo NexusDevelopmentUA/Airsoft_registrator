@@ -42,11 +42,8 @@ namespace Airsoft_registrator.Activities
         private void MButtonSignIn_Click(object sender, EventArgs e)
         {
             FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            DialogSignUp signupDialog = new DialogSignUp();
-            signupDialog.Show(transaction, "dialog fragment");
-
-            MySQL.MySQL_repository.MySQLcon();
-            StartActivity(typeof(Photos_Menu));
+            DialogSignIn signinDialog = new DialogSignIn();
+            signinDialog.Show(transaction, "dialog fragment");
         }
 
         private void SignupDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
