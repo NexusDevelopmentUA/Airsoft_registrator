@@ -129,7 +129,7 @@ namespace Airsoft_registrator.MySQL
                 con.Open();
                 DataSet dset = new DataSet();
                 adapter.SelectCommand = select;
-                string id = "", location = "", date = "", players = "";
+                string id = "", location = "", date = "", players = "", game_name = "", org = "";
                 adapter.Fill(dset, "Main");
                 foreach (DataRow row in dset.Tables["Main"].Rows)
                 {
@@ -147,7 +147,7 @@ namespace Airsoft_registrator.MySQL
                                     location = row[column].ToString();
                                     break;
                                 }
-                            case "time":
+                            case "_date":
                                 {
                                     date = row[column].ToString();
                                     break;
@@ -157,9 +157,19 @@ namespace Airsoft_registrator.MySQL
                                     players = row[column].ToString();
                                     break;
                                 }
+                            case "game_name":
+                                {
+                                    game_name = row[column].ToString();
+                                    break;
+                                }
+                            case "organisator":
+                                {
+                                    org = row[column].ToString();
+                                    break;
+                                }
                         }
                     }
-                    games_info.Add(new Game() { id = id, location = location, date = date, count_players = players });
+                    games_info.Add(new Game() { id = id, location = location, date = date, count_players = players, game_name = game_name, org = org });
                 }
                 Console.WriteLine("Query successfully done!");
             }
@@ -169,6 +179,21 @@ namespace Airsoft_registrator.MySQL
             }
             con.Close();         
             return (games_info);
+        }
+
+        public static void MySQL_add_registr(string count, string player, string game)
+        {
+            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlCommand stored = new MySqlCommand("adding_player", con);
+
+            stored.CommandType = CommandType.StoredProcedure;
+            stored.Parameters.Add(new MySqlParameter("param1", game));
+            stored.Parameters.Add(new MySqlParameter("param2", player));
+            stored.Parameters.Add(new MySqlParameter("param3", count));
+
+            stored.Connection.Open();
+            stored.ExecuteNonQuery();
+            stored.Connection.Close();
         }
     }
 }

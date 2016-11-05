@@ -7,5 +7,6 @@ namespace Airsoft_registrator
         public string date;
         public string location;
         public string count_players;
+        public string org;
     }
 }
