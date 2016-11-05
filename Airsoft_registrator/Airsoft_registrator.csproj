@@ -97,6 +97,7 @@
     <Compile Include="Activities\DialogSignIn.cs" />
     <Compile Include="Activities\DialogSignUp.cs" />
     <Compile Include="Activities\MainActivity.cs" />
+    <Compile Include="Activities\Menu.cs" />
     <Compile Include="Activities\Photos.cs" />
     <Compile Include="Activities\Photos_Menu.cs" />
     <Compile Include="Activities\Photos_upload.cs" />
@@ -142,6 +143,9 @@
     <AndroidResource Include="Resources\layout\DialogSignIn.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\CustomView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">
@@ -149,7 +153,9 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Icon.png" />

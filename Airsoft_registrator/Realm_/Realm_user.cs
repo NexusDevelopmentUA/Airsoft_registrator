@@ -14,6 +14,7 @@ namespace Airsoft_registrator.Realm_
 {
     class Realm_user:RealmObject
     {
+        public string Status { get; set; }
         public string Callsign { get; set; }
         public string Password { get; set; }
     }

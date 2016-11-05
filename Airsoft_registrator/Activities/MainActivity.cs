@@ -18,53 +18,18 @@ namespace Airsoft_registrator
     [Activity(Label = "Ігри", Icon = "@drawable/icon")]
     public class MainActivity : Activity
     {
-        
+        ListView list;
+        List<string> games_names;
         TableLayout tl;
-        //List<String> locations;
-        //List<String> dates;
-        //List<String> id;
-        List<Structure> games_info;
+        List<Game> games_info;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-
-            // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.Main);
-            MySQL.MySQL_repository.MySQLcon();
+            list = FindViewById<ListView>(Resource.Id.List);
             GetAllRecords();
-            
-        }
 
-        private void GetAllRecords()
-        {
-            games_info = MySQL_repository.MySQLselect_games("SELECT * FROM games");
-            Console.WriteLine(games_info.Count);
-            var tmp = games_info[0].id;
-            tmp = games_info[1].id;
-            tl = FindViewById<TableLayout>(Resource.Id.tableLayout1);
-            
-            foreach(var game in games_info)
-            {
-                Button reg_btn = new Button(this);
-                TextView tv = new TextView(this);
-                View view = new View(this);
-                TableRow tr = new TableRow(this);
-
-                tr.LayoutParameters = new TableLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                tv.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
-                reg_btn.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-
-                tv.Text += "" + game.location + "           " + game.date + "         " + game.count_players;
-                tv.TextSize = 12;
-
-                reg_btn.Text = "Зареєструватись";
-                reg_btn.Click +=(sender, e)=> Reg_btn_Click(sender, e, game.id.ToString());
-
-                tr.AddView(tv);
-                tr.AddView(reg_btn);
-                tl.AddView(tr);
-            }
         }
 
         private void Reg_btn_Click(object sender, EventArgs e, string id)
@@ -72,11 +37,75 @@ namespace Airsoft_registrator
             string count_str = MySQL_repository.MySQLselect_string("SELECT players FROM games WHERE idgames= '" + id + "'");
             int count = Int32.Parse(count_str);
             count++;
-            string query = "UPDATE airsoft_rush.games SET games.players='"+count.ToString()+"' WHERE idgames='"+id+"';";
+            string query = "UPDATE airsoft_rush.games SET games.players='" + count.ToString() + "' WHERE idgames='" + id + "';";
             MySQL_repository.MySQLquery(query);
             Toast.MakeText(this, "Успішно зареєстровано", ToastLength.Short);
         }
-        
+
+        private void GetAllRecords()
+        {
+            games_names = MySQL_repository.MySQLselect("SELECT game_name FROM games");
+            foreach (var val in games_names)
+            {
+
+            }
+            CustomListViewAdapter adapter = new CustomListViewAdapter(this, games_info);
+            list.Adapter = adapter;
+        }
+
+    }
+
+    class CustomListViewAdapter : BaseAdapter<Game>
+    {
+        private List<Game> items;
+        private Context context;
+
+        public CustomListViewAdapter(Context pcontext, List<Game> pitems)
+        {
+            items = pitems;
+            context = pcontext;
+        }
+
+        public override int Count
+        {
+            get
+            {
+                return items.Count();
+            }
+        }
+
+        public override Game this[int position]
+        {
+            get
+            {
+                return items[position];
+            }
+        }
+
+        public override long GetItemId(int position)
+        {
+            return position;
+        }
+
+        public override View GetView(int position, View convertView, ViewGroup parent)
+        {
+            View row = convertView;
+
+            if (row == null)
+            {
+                row = LayoutInflater.From(context).Inflate(Resource.Layout.CustomView, null, false);
+            }
+
+            TextView game_name = row.FindViewById<TextView>(Resource.Id.txtGameName);
+            TextView count_players = row.FindViewById<TextView>(Resource.Id.txtCount);
+            Button registrate = row.FindViewById<Button>(Resource.Id.btnRegistrate);
+
+            game_name.Text = items[position].game_name;
+            count_players.Text = items[position].count_players;
+            registrate.Text = "Зареєструватись";
+            return row;
+        }
     }
 }
+
 

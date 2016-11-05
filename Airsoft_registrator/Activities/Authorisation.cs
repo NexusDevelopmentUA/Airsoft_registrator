@@ -31,19 +31,30 @@ namespace Airsoft_registrator.Activities
             mButtonSignUp.Click += (object sender, EventArgs args) =>
             {
                 //pull up dialog
-                FragmentTransaction transaction = FragmentManager.BeginTransaction();
-                DialogSignUp signupDialog = new DialogSignUp();
-                signupDialog.Show(transaction, "dialog fragment");
+                    FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                    DialogSignUp signupDialog = new DialogSignUp();
+                    signupDialog.Show(transaction, "dialog fragment");
 
-                signupDialog.mOnSignUpComplete += SignupDialog_mOnSignUpComplete;
+                    signupDialog.mOnSignUpComplete += SignupDialog_mOnSignUpComplete;
             };
         }
 
         private void MButtonSignIn_Click(object sender, EventArgs e)
         {
-            FragmentTransaction transaction = FragmentManager.BeginTransaction();
-            DialogSignIn signinDialog = new DialogSignIn();
-            signinDialog.Show(transaction, "dialog fragment");
+            //Знаю, страшний костиль, але нічого краще я не придумав
+            var realm = Realm.GetInstance();
+            var CurrentUser = realm.All<Realm_user>().Where(d=>d.Status=="LogIn");
+            foreach(var val in CurrentUser)
+            {
+                
+            }
+            if (CurrentUser.Count()!=1)
+            {
+                FragmentTransaction transaction = FragmentManager.BeginTransaction();
+                DialogSignIn signinDialog = new DialogSignIn();
+                signinDialog.Show(transaction, "dialog fragment");
+            }
+            else StartActivity(typeof(MainActivity));
         }
 
         private void SignupDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)

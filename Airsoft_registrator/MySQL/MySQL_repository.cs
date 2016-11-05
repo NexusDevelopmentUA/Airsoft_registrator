@@ -11,7 +11,7 @@ namespace Airsoft_registrator.MySQL
     {
 
         protected const string constring_db4free = "Server=db4free.net; Port=3306; Database=airsoft_rush; Uid=bigroot; Pwd=bigroot";
-        protected const string constring_localhost = "Server=localhost; Port=3306; Database=airsoft7; Uid=root; Pwd=root;";
+        protected const string constring_localhost = "server=localhost; user=root;database=airsoft;port=3306; password=root";
 
         public static string MySQLcon()
         {
@@ -114,11 +114,11 @@ namespace Airsoft_registrator.MySQL
             return (result);
         }
 
-        public static List<Structure> MySQLselect_games(string query_in)
+        public static List<Game> MySQLselect_games(string query_in)
         {
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
-            List<Structure> games_info = new List<Structure>();
+            List<Game> games_info = new List<Game>();
             string query = "input params and other stuff...";
             query = query_in;
 
@@ -159,7 +159,7 @@ namespace Airsoft_registrator.MySQL
                                 }
                         }
                     }
-                    games_info.Add(new Structure() { id = id, location = location, date = date, count_players = players });
+                    games_info.Add(new Game() { id = id, location = location, date = date, count_players = players });
                 }
                 Console.WriteLine("Query successfully done!");
             }

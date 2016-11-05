@@ -9,6 +9,8 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Realms;
+using Airsoft_registrator.Realm_;
 
 namespace Airsoft_registrator.Activities
 {
@@ -38,8 +40,8 @@ namespace Airsoft_registrator.Activities
         {
             mOnSignInComplete.Invoke(this, new OnSignInEventArgs(mTextCallSign.Text, mPass.Text));
             this.Dismiss();
-            //var intent = new Intent(Activity, typeof(Menu));
-            //StartActivity(intent);
+            var intent = new Intent(Activity, typeof(User_Profile));
+            StartActivity(intent);
         }
 
         public override void OnActivityCreated(Bundle savedInstanceState)
@@ -52,26 +54,16 @@ namespace Airsoft_registrator.Activities
 
     public class OnSignInEventArgs:EventArgs
     {
-        private string mCallsign;
-        private string mPass;
-
-        public string Callsign
-        {
-            get { return mCallsign; }
-            set { mCallsign = value; }
-        }
-
-        public string Pass
-        {
-            get { return mPass; }
-            set { mPass = value; }
-        }
-
         public OnSignInEventArgs(string callsign, string pass):base()
         {
-            Callsign = callsign;
-            Pass = pass;
+            var realm = Realm.GetInstance();
+            realm.Write(() =>
+            {
+                var User = realm.CreateObject<Realm_user>();
+                User.Callsign = callsign;
+                User.Password = pass;
+                User.Status = "LogIn";
+            });
         }
-
     }
 }

@@ -30,7 +30,6 @@ namespace Airsoft_registrator
         protected override void OnResume()
         {
             base.OnResume();
-
             Task startupWork = new Task(() => {
                 Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
                 Task.Delay(5000);  // Simulate a bit of startup work.
