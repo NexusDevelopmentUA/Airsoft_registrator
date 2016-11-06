@@ -14,6 +14,7 @@ using Realms;
 using Android.Graphics;
 using MySql.Data.MySqlClient;
 using Airsoft_registrator.Realm_;
+using Airsoft_registrator.Activities;
 
 namespace Airsoft_registrator
 {
@@ -23,25 +24,19 @@ namespace Airsoft_registrator
         ListView list;
         TableLayout tl;
         List<Game> games_info;
+        public static List<string> players;
 
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
             list = FindViewById<ListView>(Resource.Id.List);
-            GetAllRecords();
-
+            //GetAllRecords();
+            games_info = MySQL_repository.MySQLselect_games("SELECT * FROM games");
+            CustomListViewAdapter adapter = new CustomListViewAdapter(this, games_info);
+            list.Adapter = adapter;
+            list.ItemClick += List_ItemClick;
         }
-
-        //private void Reg_btn_Click(object sender, EventArgs e, string id)
-        //{
-        //    string count_str = MySQL_repository.MySQLselect_string("SELECT players FROM games WHERE idgames= '" + id + "'");
-        //    int count = Int32.Parse(count_str);
-        //    count++;
-        //    string query = "UPDATE airsoft_rush.games SET games.players='" + count.ToString() + "' WHERE idgames='" + id + "';";
-        //    MySQL_repository.MySQLquery(query);
-        //    Toast.MakeText(this, "Успішно зареєстровано", ToastLength.Short);
-        //}
 
         private void GetAllRecords()
         {
@@ -53,7 +48,9 @@ namespace Airsoft_registrator
 
         private void List_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("anything");
+            players = MySQL_repository.MySQLselect("SELECT players FROM journal WHERE games = '" + games_info[e.Position].game_name + "'");
+            StartActivity(typeof(Players));
         }
     }
 
@@ -104,21 +101,24 @@ namespace Airsoft_registrator
             Button registrate = row.FindViewById<Button>(Resource.Id.btnRegistrate);
 
             game_name.Text = items[position].game_name;
-            count_players.Text = items[position].count_players;
+            count_players.Text = items[position].count_players.ToString();
             org.Text = items[position].org;
+
             registrate.Text = "Зареєструватись";
-            registrate.Click += (object sender, EventArgs args)=>
+            registrate.Focusable = false;
+            registrate.FocusableInTouchMode = false;
+            registrate.Clickable = true;
+            registrate.Click += (object sender, EventArgs args) =>
             {
-                string tmp;
+                string tmp = "";
                 var realm = Realm.GetInstance();
                 var CurrentUser = realm.All<Realm_user>().Where(d => d.Status == "LogIn");
-                foreach(var val in CurrentUser)
+                foreach (var val in CurrentUser)
                 {
                     tmp = val.Callsign;
                 }
-                MySQL_repository.MySQL_add_registr(items[position].count_players, tmp, items[position].game_name)
-                //List<string> DataForNextActvity = MySQL_repository.MySQLselect("SELECT players FROM journal WHERE games = '" + items[position].game_name+"'");
-                //var NextActivity = new Intent(this, typeof(Registered_Players));
+                MySQL_repository.MySQL_add_registr(items[position].count_players, tmp, items[position].game_name);
+                
             };
             return row;
         }

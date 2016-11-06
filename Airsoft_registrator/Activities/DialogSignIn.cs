@@ -38,9 +38,7 @@ namespace Airsoft_registrator.Activities
 
         private void MSignIn_Click(object sender, EventArgs e)
         {
-            mOnSignInComplete.Invoke(this, new OnSignInEventArgs(mTextCallSign.Text, mPass.Text));
-            this.Dismiss();
-            var intent = new Intent(Activity, typeof(User_Profile));
+            var intent = new Intent(Activity, typeof(MainActivity));
             StartActivity(intent);
         }
 

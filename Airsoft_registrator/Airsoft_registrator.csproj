@@ -101,6 +101,7 @@
     <Compile Include="Activities\Photos.cs" />
     <Compile Include="Activities\Photos_Menu.cs" />
     <Compile Include="Activities\Photos_upload.cs" />
+    <Compile Include="Activities\Players.cs" />
     <Compile Include="Activities\User_Profile.cs" />
     <Compile Include="MySQL\MySQL_repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

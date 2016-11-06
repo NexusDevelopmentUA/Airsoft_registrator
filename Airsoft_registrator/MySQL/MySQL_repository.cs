@@ -129,7 +129,8 @@ namespace Airsoft_registrator.MySQL
                 con.Open();
                 DataSet dset = new DataSet();
                 adapter.SelectCommand = select;
-                string id = "", location = "", date = "", players = "", game_name = "", org = "";
+                string id = "", location = "", date = "",  game_name = "", org = "";
+                int players = 1;
                 adapter.Fill(dset, "Main");
                 foreach (DataRow row in dset.Tables["Main"].Rows)
                 {
@@ -154,7 +155,7 @@ namespace Airsoft_registrator.MySQL
                                 }
                             case "players":
                                 {
-                                    players = row[column].ToString();
+                                    players = Int32.Parse(row[column].ToString());
                                     break;
                                 }
                             case "game_name":
@@ -181,19 +182,29 @@ namespace Airsoft_registrator.MySQL
             return (games_info);
         }
 
-        public static void MySQL_add_registr(string count, string player, string game)
+        public static void MySQL_add_registr(int count, string player, string game)
         {
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlCommand stored = new MySqlCommand("adding_player", con);
+            count++;
+            try
+            {
+                stored.CommandType = CommandType.StoredProcedure;
+                stored.Parameters.Add(new MySqlParameter("game", game));
+                stored.Parameters.Add(new MySqlParameter("player", player));
+                stored.Parameters.Add(new MySqlParameter("count_players", count));
 
-            stored.CommandType = CommandType.StoredProcedure;
-            stored.Parameters.Add(new MySqlParameter("param1", game));
-            stored.Parameters.Add(new MySqlParameter("param2", player));
-            stored.Parameters.Add(new MySqlParameter("param3", count));
-
-            stored.Connection.Open();
-            stored.ExecuteNonQuery();
-            stored.Connection.Close();
+                stored.Connection.Open();
+                stored.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                stored.Connection.Close();
+            }
         }
     }
 }
