@@ -1,16 +1,14 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
+using Android.Support.V4.Widget;
 using Android.Widget;
 using Realms;
 using Airsoft_registrator.MySQL;
+using Android.Support.V4.App;
+using Android.Views;
 
 namespace Airsoft_registrator.Activities
 {
@@ -21,19 +19,29 @@ namespace Airsoft_registrator.Activities
         RatingBar Rate;
         string requested_user;
 
+        DrawerLayout mDrawerLayout;
+        List<string> mLeftItems = new List<string>();
+        ArrayAdapter mLeftAdapter;
+        ListView mLeftDrawer;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.UserProfile);
+            mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawer);
+            mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
 
             requested_user = Intent.GetStringExtra("Requested Player");
+
+            var activity = typeof(User_Profile);
+            Drawer menu = new Drawer();
+            menu.drawer(mDrawerLayout, mLeftItems, mLeftDrawer, this, this);
 
             Callsign = FindViewById<TextView>(Resource.Id.txtUserCallsign);
             Team = FindViewById<TextView>(Resource.Id.txtUserTeam);
             Camo = FindViewById<TextView>(Resource.Id.txtUserCamo);
             Rate = FindViewById<RatingBar>(Resource.Id.UserRate);
-            
             var realm = Realm.GetInstance();
             var User = realm.All<Realm_.Realm_user>();
             string tmp_callsign = "";
@@ -60,5 +68,9 @@ namespace Airsoft_registrator.Activities
                 Rate.Rating = float.Parse(temp);
             }
         }
+
+        
     }
+
+
 }

@@ -16,7 +16,7 @@ using Airsoft_registrator.Activities;
 
 namespace Airsoft_registrator
 {
-    [Activity(Theme = "@style/MyTheme.Splash", MainLauncher = true, NoHistory = true)]
+    [Activity(Theme = "@style/MyTheme.Splash",  NoHistory = true)]
     public class SplashActivity : AppCompatActivity
     {
         static readonly string TAG = "X:" + typeof(SplashActivity).Name;
@@ -30,6 +30,7 @@ namespace Airsoft_registrator
         protected override void OnResume()
         {
             base.OnResume();
+            MySQL.MySQL_repository.MySQLcon();
             Task startupWork = new Task(() => {
                 Log.Debug(TAG, "Performing some startup work that takes a bit of time.");
                 Task.Delay(5000);  // Simulate a bit of startup work.

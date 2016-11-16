@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ApplicationName">Airsoft_registrator</string>
+    <string name="open_drawer">Open Drawer</string>
+	  <string name="close_drawer">Close Drawer</string>
 </resources>

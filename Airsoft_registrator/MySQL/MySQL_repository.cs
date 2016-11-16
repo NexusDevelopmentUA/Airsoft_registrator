@@ -11,13 +11,13 @@ namespace Airsoft_registrator.MySQL
     {
 
         protected const string constring_db4free = "Server=db4free.net; Port=3306; Database=airsoft_rush; Uid=bigroot; Pwd=bigroot";
-        protected const string constring_localhost = "server=localhost; user=root;database=airsoft;port=3306; password=root";
+        protected const string constring_localhost = "server=127.0.0.1; user=root;database=airsoft_rush;port=3306; password=root";
 
         public static string MySQLcon()
         {
            
             string output = "";
-            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlConnection con = new MySqlConnection(constring_localhost);
             try
                
             {

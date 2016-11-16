@@ -9,22 +9,32 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Android.Support.V4.Widget;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Menu")]
+    [Activity(Label = "Menu", MainLauncher = true)]
     public class Menu : Activity
     {
-        GridView gv;
+        DrawerLayout mDrawerLayout;
+        List<string> mLeftItems = new List<string>();
+        ArrayAdapter mLeftAdapter;
+        ListView mLeftDrawer;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.Menu);
+            mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawer);
+            mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
 
-            gv = FindViewById<GridView>(Resource.Id.gridview);
-            
+            var activity = typeof(User_Profile);
+            Drawer menu = new Drawer();
+            menu.drawer(mDrawerLayout, mLeftItems, mLeftDrawer, this, this);
+            //gv = FindViewById<GridView>(Resource.Id.gridview);
+
         }
     }
 }
