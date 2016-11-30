@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using System.Linq;
 
-namespace Airsoft_registrator.MySQL
+namespace API_logic.MySQL
 {
     class MySQL_repository
     {
@@ -113,8 +113,42 @@ namespace Airsoft_registrator.MySQL
             con.Close();
             return (result);
         }
+        public static IEnumerable<Game> MySQL_select_game()
+        {
+            string query = "Select * FROM games";
+            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlDataAdapter adapter = new MySqlDataAdapter();
+            List<Game> list = new List<Game>();
+            try
+            {
+                MySqlCommand select = new MySqlCommand(query, con);
+                con.Open();
+                select = con.CreateCommand();
+                con.Open();
 
-        public static List<Game> MySQLselect_games(string query_in)
+                using (MySqlDataReader reader = select.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string game_name = (string)reader["game_name"];
+                        string location = (string)reader["location"];
+                        string date = (string)reader["_date"];
+                        string organisator = (string)reader["organisator"];
+                        int players = (int)reader["players"];
+                        var file = new Game { game_name = game_name, location = location, date = date, org = organisator, count_players = players };
+
+                        list.Add(file);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return list;
+
+        }
+/*        public static List<Game> MySQLselect_games(string query_in)
         {
             MySqlConnection con = new MySqlConnection(constring_db4free);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
@@ -181,7 +215,7 @@ namespace Airsoft_registrator.MySQL
             con.Close();         
             return (games_info);
         }
-
+        */
         public static void MySQL_add_registr(int count, string player, string game)
         {
             MySqlConnection con = new MySqlConnection(constring_db4free);
@@ -193,6 +227,31 @@ namespace Airsoft_registrator.MySQL
                 stored.Parameters.Add(new MySqlParameter("game", game));
                 stored.Parameters.Add(new MySqlParameter("player", player));
                 stored.Parameters.Add(new MySqlParameter("count_players", count));
+
+                stored.Connection.Open();
+                stored.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                stored.Connection.Close();
+            }
+        }
+        public static void MySQL_add_game(string name, string location, DateTime date, int players, string organisator)
+        {
+            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlCommand stored = new MySqlCommand("adding_new_game", con);
+            try
+            {
+                stored.CommandType = CommandType.StoredProcedure;
+                stored.Parameters.Add(new MySqlParameter("_name", name));
+                stored.Parameters.Add(new MySqlParameter("location", location));
+                stored.Parameters.Add(new MySqlParameter("_date", date));
+                stored.Parameters.Add(new MySqlParameter("players", players));
+                stored.Parameters.Add(new MySqlParameter("org", organisator));
 
                 stored.Connection.Open();
                 stored.ExecuteNonQuery();

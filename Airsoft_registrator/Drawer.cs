@@ -7,6 +7,8 @@ using Android.Support.V4.Widget;
 using Android.Widget;
 using Android.Support.V4.App;
 using Android.Views;
+using System;
+using Airsoft_registrator.Activities;
 
 namespace Airsoft_registrator
 {
@@ -18,23 +20,61 @@ namespace Airsoft_registrator
         ListView mLeftDrawer;
         ArrayAdapter mLeftAdapter;
         ActionBarDrawerToggle mDrawerToggle;
+        string CurrentViewName;
 
-        public void drawer(DrawerLayout drawerlayout, List<string> items, ListView drawler, Context context, Activity activity)
+        public void drawer(DrawerLayout drawerlayout, string pCurrentViewName, ListView drawler, Context context, Activity activity)
         {
-            DrawerLayout mDrawerLayout = drawerlayout;
-            List<string> mLeftItems = items;
+            SetContentView(Resource.Layout.Main);
+            DrawerLayout mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.testDrawer);
+            List<string> mLeftItems = new List<string>();
             ListView mLeftDrawer = drawler;
             ActionBarDrawerToggle mDrawerToggle;
-
-            mDrawerToggle = new MyActionBarDrawerToggle(activity, mDrawerLayout, Resource.Drawable.ic_navigation_drawer, Resource.String.open_drawer, Resource.String.close_drawer);
-
+            CurrentViewName = pCurrentViewName;
+            mLeftDrawer = new ListView(context);
+            string[] set =
+            {
+                "Список ігор",
+                "Додати гру",
+                "Фото",
+                "Профіль користувача"
+            };
+            mLeftItems.AddRange(set);
             mLeftAdapter = new ArrayAdapter(context, Android.Resource.Layout.SimpleListItem1, mLeftItems);
             mLeftDrawer.Adapter = mLeftAdapter;
-
+            mLeftDrawer.ItemClick += MLeftDrawer_ItemClick;
+            mDrawerToggle = new MyActionBarDrawerToggle(activity, mDrawerLayout, Resource.Drawable.ic_navigation_drawer, Resource.String.open_drawer, Resource.String.close_drawer);
             mDrawerLayout.SetDrawerListener(mDrawerToggle);
             activity.ActionBar.SetDisplayHomeAsUpEnabled(true);
             activity.ActionBar.SetHomeButtonEnabled(true);
             activity.ActionBar.SetDisplayShowTitleEnabled(true);
+        }
+
+        private void MLeftDrawer_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            if(mLeftItems[e.Position]!=CurrentViewName)
+            switch(mLeftItems[e.Position])
+            {
+                    case "Список ігор":
+                    {
+                            StartActivity(typeof(MainActivity));
+                        break;
+                    }
+                    case "Додати гру":
+                        {
+                            StartActivity(typeof(Create_Game));
+                            break;
+                        }
+                    case "Фото":
+                        {
+                            StartActivity(typeof(Photos_Menu));
+                            break;
+                        }
+                    case "Профіль користувача":
+                        {
+                            StartActivity(typeof(User_Profile));
+                            break;
+                        }
+                }
         }
 
         protected override void OnPostCreate(Bundle savedInstanceState)
@@ -55,5 +95,10 @@ namespace Airsoft_registrator
             return base.OnCreateOptionsMenu(menu);
         }
 
+    }
+
+    abstract class State
+    {
+        public abstract void Handle();
     }
 }

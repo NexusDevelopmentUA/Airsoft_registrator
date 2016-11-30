@@ -14,7 +14,7 @@
             android:id="@+id/txtGameName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF7F3300"
+            android:textColor="#FFF"
             android:textSize="20dip"
             android:textStyle="italic" />
         <TextView
@@ -22,15 +22,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dip"
-            android:textColor="#FF267F00"
-            android:paddingLeft="100dip" />
-      <TextView
+            android:textColor="#FFF"
+             />
+        <TextView
             android:id="@+id/txtOrg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dip"
-            android:textColor="#FF267F00"
-            android:paddingLeft="100dip" />
+            android:textColor="#FFF"
+             />
     </LinearLayout>
     <Button
         android:id="@+id/btnRegistrate"

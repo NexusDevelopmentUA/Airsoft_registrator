@@ -3,4 +3,13 @@
     <string name="ApplicationName">Airsoft_registrator</string>
     <string name="open_drawer">Open Drawer</string>
 	  <string name="close_drawer">Close Drawer</string>
+  <array name="Activities">
+    <item>Список ігор</item>
+    <item>Додати нову гру</item>
+    <item>Завантажити фото</item>
+    <item>Додати новий архів фото</item>
+    <item>Профіль</item>
+    <item>Вийти</item>
+  </array>
+  
 </resources>

@@ -14,7 +14,7 @@ using Airsoft_registrator.Realm_;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Authorisation")]
+    [Activity(Label = "Authorisation", MainLauncher = true)]
     public class Authorisation : Activity
     {
         private Button mButtonSignUp, mButtonSignIn;
@@ -23,7 +23,7 @@ namespace Airsoft_registrator.Activities
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Authorisation);
-
+            MySQL.MySQL_repository.MySQLcon();
             mButtonSignIn = FindViewById<Button>(Resource.Id.btn_sign_in);
             mButtonSignUp = FindViewById<Button>(Resource.Id.btn_sign_up);
 

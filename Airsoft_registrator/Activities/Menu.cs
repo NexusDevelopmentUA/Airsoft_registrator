@@ -10,10 +10,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.Support.V4.Widget;
+using Android.Support.V4.App;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Menu", MainLauncher = true)]
+    [Activity(Label = "Menu")]
     public class Menu : Activity
     {
         DrawerLayout mDrawerLayout;
@@ -32,7 +33,6 @@ namespace Airsoft_registrator.Activities
 
             var activity = typeof(User_Profile);
             Drawer menu = new Drawer();
-            menu.drawer(mDrawerLayout, mLeftItems, mLeftDrawer, this, this);
             //gv = FindViewById<GridView>(Resource.Id.gridview);
 
         }

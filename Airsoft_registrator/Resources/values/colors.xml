@@ -7,5 +7,7 @@
      <color name="accent">#FFC107</color>
      <color name="window_background">#F5F5F5</color>
      <color name="splash_background">#FFFFFF</color>
-  
+  <color name="titlebackgroundcolor">#9E750F</color>
+  <color name="titletextcolor">#DAB14D</color>
+     
 </resources>

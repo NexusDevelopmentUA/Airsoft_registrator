@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#7F6C49">
     <TextView
         android:id="@+id/Heading"
         android:text="Доступні ігри"
@@ -17,5 +18,6 @@
         android:id="@+id/List"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:background="#7F6C49"
         android:cacheColorHint="#FFDAFF7F" />
 </LinearLayout>

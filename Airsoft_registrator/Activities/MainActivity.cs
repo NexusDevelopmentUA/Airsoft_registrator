@@ -15,6 +15,7 @@ using Android.Graphics;
 using MySql.Data.MySqlClient;
 using Airsoft_registrator.Realm_;
 using Airsoft_registrator.Activities;
+using Android.Support.V4.Widget;
 
 namespace Airsoft_registrator
 {
@@ -25,17 +26,27 @@ namespace Airsoft_registrator
         TableLayout tl;
         List<Game> games_info;
         public static List<string> players;
+        DrawerLayout mDrawerLayout;
+        ListView mLeftDrawer;
 
         protected override void OnCreate(Bundle bundle)
         {
+            string activity_name = "Список ігор";
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.Main);
+
+            mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawerCG);
+            mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListView);
+            Drawer menu = new Drawer();
+            menu.drawer(mDrawerLayout, activity_name, mLeftDrawer, this, this);
+
             list = FindViewById<ListView>(Resource.Id.List);
-            //GetAllRecords();
             games_info = MySQL_repository.MySQLselect_games("SELECT * FROM games");
             CustomListViewAdapter adapter = new CustomListViewAdapter(this, games_info);
             list.Adapter = adapter;
             list.ItemClick += List_ItemClick;
+
+            
         }
 
         private void GetAllRecords()
