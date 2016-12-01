@@ -1,9 +1,14 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 
 using Android.App;
+using Android.Content;
 using Android.OS;
+using Android.Runtime;
+using Android.Views;
 using Android.Widget;
-using Android.Support.V4.Widget;
 
 namespace Airsoft_registrator.Activities
 {
@@ -12,21 +17,12 @@ namespace Airsoft_registrator.Activities
     {
         Button add;
         TextView location, name, date;
-        DrawerLayout mDrawerLayout;
-        ListView mLeftDrawer;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
-            string activity_name = "Додати гру";
-
             SetContentView(Resource.Layout.CreateGame);
-
-            mDrawerLayout = FindViewById<DrawerLayout>(Resource.Id.myDrawerCG);
-            mLeftDrawer = FindViewById<ListView>(Resource.Id.leftListViewCG);
-            Drawer menu = new Drawer();
-            menu.drawer(mDrawerLayout, activity_name, mLeftDrawer, this, this);
 
             add = FindViewById<Button>(Resource.Id.btn_GameInsert);
             name = FindViewById<TextView>(Resource.Id.txt_name);

@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Photos_Menu", Theme = "@style/customTheme")]
+    [Activity(Label = "Photos_Menu")]
     public class Photos_Menu : Activity
     {
         
@@ -26,112 +26,16 @@ namespace Airsoft_registrator.Activities
 
             //upload.Click += Upload_Click;
             //download.Click += Download_Click;
-            this.ActionBar.NavigationMode = ActionBarNavigationMode.Tabs;
-            AddTab("Додати фото", Resource.Drawable.upload_icon, new PhotosUpload());
-
-            AddTab("Завантажити фото", Resource.Drawable.download_icon, new PhotosDownload());
-
-
-
-            if (savedInstanceState != null)
-
-                this.ActionBar.SelectTab(this.ActionBar.GetTabAt(savedInstanceState.GetInt("tab")));
-
-
-
         }
 
-
-
-        protected override void OnSaveInstanceState(Bundle outState)
-
+        private void Download_Click(object sender, EventArgs e)
         {
-
-            outState.PutInt("tab", this.ActionBar.SelectedNavigationIndex);
-
-
-
-            base.OnSaveInstanceState(outState);
-
+            StartActivity(typeof(Photos));
         }
 
-
-
-        void AddTab(string tabText, int iconResourceId, Fragment view)
-
+        private void Upload_Click(object sender, EventArgs e)
         {
-
-            var tab = this.ActionBar.NewTab();
-
-            tab.SetText(tabText);
-
-            tab.SetIcon(iconResourceId);
-
-
-
-            // must set event handler before adding tab
-
-            tab.TabSelected += delegate (object sender, ActionBar.TabEventArgs e)
-
-            {
-
-                var fragment = this.FragmentManager.FindFragmentById(Resource.Id.fragmentContainer);
-
-                if (fragment != null)
-
-                    e.FragmentTransaction.Remove(fragment);
-
-                e.FragmentTransaction.Add(Resource.Id.fragmentContainer, view);
-
-            };
-
-            tab.TabUnselected += delegate (object sender, ActionBar.TabEventArgs e) {
-
-                e.FragmentTransaction.Remove(view);
-
-            };
-
-
-
-            this.ActionBar.AddTab(tab);
-
+            StartActivity(typeof(Photos_upload));
         }
-
-
-
-        class PhotosUpload : Fragment
-
-        {
-
-            public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-
-            {
-                base.OnCreateView(inflater, container, savedInstanceState);
-
-                var view = inflater.Inflate(Resource.Layout.PhotosUpload, container, false);
-
-                return view;
-            }
-
-        }
-
-
-
-        class PhotosDownload : Fragment
-
-        {
-
-            public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-
-            {
-                base.OnCreateView(inflater, container, savedInstanceState);
-
-                var view = inflater.Inflate(Resource.Layout.Photos, container, false);
-
-                return view;
-            }
-
-        }
-
     }
 }

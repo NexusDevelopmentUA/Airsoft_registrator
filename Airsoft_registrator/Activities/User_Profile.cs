@@ -12,7 +12,7 @@ using Android.Views;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "User_Profile")]
+    [Activity(Label = "User_Profile", MainLauncher = true)]
     public class User_Profile : Activity
     {
         TextView Callsign, Team, Camo;
@@ -36,6 +36,7 @@ namespace Airsoft_registrator.Activities
 
             var activity = typeof(User_Profile);
             Drawer menu = new Drawer();
+            menu.drawer(mDrawerLayout, mLeftItems, mLeftDrawer, this, this);
 
             Callsign = FindViewById<TextView>(Resource.Id.txtUserCallsign);
             Team = FindViewById<TextView>(Resource.Id.txtUserTeam);

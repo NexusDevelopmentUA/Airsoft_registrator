@@ -1,5 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<resources>
+﻿<resources>
   <style name="MyTheme.Base" parent="Theme.AppCompat.Light">
   </style>
 
@@ -13,11 +12,5 @@
   <style name="dialog_animation">
     <item name="android:windowEnterAnimation">@anim/SlideUp</item>
     <item name="android:windowExitAnimation">@anim/SlideRight</item>
-  </style>
-    <style name="customTheme" parent="android:Theme">
-      <item name="android:windowTitleBackgroundStyle">@style/WindowTitleBackground</item>
-    </style>
-  <style name="WindowTitleBackground">
-    <item name="android:background">#9E750F</item>
   </style>
 </resources>
