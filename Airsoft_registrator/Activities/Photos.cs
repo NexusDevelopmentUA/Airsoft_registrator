@@ -14,8 +14,8 @@ using static Airsoft_registrator.Resource;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Photos")]
-    public class Photos : Activity
+    [Activity(Label = "Скачати фото")]
+    public class Photos : ListActivity
     {
 
         TextView tv;
@@ -29,42 +29,12 @@ namespace Airsoft_registrator.Activities
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.Photos);
-
             photos = MySQL.MySQL_repository.MySQLselect("SELECT name FROM photos");
-            tl = FindViewById<TableLayout>(Resource.Id.table_l);
-            foreach (var item in photos)
-            {
-                TableLayout.LayoutParams lparams = new TableLayout.LayoutParams(ViewGroup.LayoutParams.FillParent, TableLayout.LayoutParams.WrapContent);
-                TableRow.LayoutParams rparams = new TableRow.LayoutParams(ViewGroup.LayoutParams.FillParent, TableLayout.LayoutParams.WrapContent);
-                tr = new TableRow(this);
-                tr.LayoutParameters = rparams;
-
-                view = new View(this);
-                view.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.MatchParent, 2);
-                view.SetBackgroundColor(Android.Graphics.Color.Black);
-
-                tv = new TextView(this);
-                tv.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-                tv.Text = item;
-                tr.AddView(tv);
-
-                btn = new Button(this);
-                btn.LayoutParameters = new TableRow.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-                btn.Text = "Download";
-                btn.Click+=(sender,e)=>Btn_Click(sender,e, item);//lambda expression
-                tr.AddView(btn);
-
-                tl.AddView(tr, lparams);
-                tl.AddView(view);
-            }
-
-            
+            ListAdapter = new ArrayAdapter<string>(this, Android.Resource.Layout.SimpleListItem1, photos);
         }
-
-        private void Btn_Click(object sender, EventArgs e, string input)
+        protected override void OnListItemClick(ListView l, View v, int position, long id)
         {
-            string query = "SELECT link FROM photos WHERE name = '"+input+"';";
+            string query = "SELECT link FROM photos WHERE name = '" + photos[position] + "';";
             string link = MySQL.MySQL_repository.MySQLselect_string(query);
             if (!link.StartsWith("http"))
             {

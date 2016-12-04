@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="#000"
+    android:background="@android:color/background_light"
     android:padding="8dp">
     <LinearLayout
         android:id="@+id/Text"
@@ -14,7 +14,7 @@
             android:id="@+id/txtGameName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="#FF7F3300"
+            android:textColor="#000"
             android:textSize="20dip"
             android:textStyle="italic" />
         <TextView
@@ -22,14 +22,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dip"
-            android:textColor="#FF267F00"
+            android:textColor="#000"
             android:paddingLeft="100dip" />
-      <TextView
+        <TextView
             android:id="@+id/txtOrg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="14dip"
-            android:textColor="#FF267F00"
+            android:textColor="#000"
             android:paddingLeft="100dip" />
     </LinearLayout>
     <Button
@@ -37,5 +37,6 @@
         android:padding="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="#000"
         android:layout_alignParentRight="true" />
 </RelativeLayout>

@@ -9,10 +9,11 @@
     android:minHeight="25px">
     <TextView
         android:id="@+id/txtUpload"
-        android:text="Upload photos"
+        android:text="Завантажити фото"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
+        android:textSize="20dp"
         android:gravity="center"
         android:textColor="#000" />
     <EditText
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_name"
         android:background="@drawable/editTextStyle"
-        android:hint="Insert name of the photos folder here"
+        android:hint="Ввеіть назву колекції фото"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -37,12 +38,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Insert link to your photos folder here"
+        android:hint="Вставте посилання"
         android:textColorHint="#000"
         android:paddingLeft="10dp"
         android:textColor="#000" />
     <Button
-        android:text="Upload!"
+        android:text="Додати!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_PhotosUpload"

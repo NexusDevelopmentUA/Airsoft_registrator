@@ -9,6 +9,19 @@
     <item name="android:windowBackground">@drawable/splash</item>
     <item name="android:windowNoTitle">true</item>
   </style>
+  <style name="MyTheme.Main" parent ="android:Theme.Holo.Light">
+    <item name="android:actionBarStyle">@style/MyActionBar</item>
+  </style>
+  <style name="MyActionBar"
+         parent ="@android:Widget.Holo.Light.ActionBar.Solid.Inverse">
+    <item name="android:background">#7c9885</item>
+    <item name="android:backgroundStacked">#7c9885</item>
+  </style>
+  <style name="MyTheme.Toolbar" parent="@android:style/Theme.Material.Light.DarkActionBar">
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowActionBar">false</item>
+    <item name="android:colorPrimary">#7c9885</item>
+  </style>
   <style name="dialog_animation">
     <item name="android:windowEnterAnimation">@anim/SlideUp</item>
     <item name="android:windowExitAnimation">@anim/SlideRight</item>

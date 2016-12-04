@@ -13,7 +13,7 @@ using Android.Support.V7.App;
 using Android.Util;
 using System.Threading.Tasks;
 using Airsoft_registrator.Activities;
-
+using Realms;
 namespace Airsoft_registrator
 {
     [Activity(Theme = "@style/MyTheme.Splash",  NoHistory = true)]
@@ -24,6 +24,7 @@ namespace Airsoft_registrator
         public override void OnCreate(Bundle savedInstanceState, PersistableBundle persistentState)
         {
             base.OnCreate(savedInstanceState, persistentState);
+            
             Log.Debug(TAG, "SplashActivity.OnCreate");
         }
 
@@ -40,9 +41,17 @@ namespace Airsoft_registrator
             startupWork.ContinueWith(t => {
                 Log.Debug(TAG, "Work is finished - start Activity1.");
                 //StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+                //MySQL.MySQL_repository.MySQLcon();
+                
                 StartActivity(typeof(Authorisation));
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
+            var realm = Realm.GetInstance();
+            realm.Write(() =>
+            {
+                realm.RemoveAll();
+            });
+            
             startupWork.Start();
         }
     }

@@ -12,12 +12,13 @@ namespace Airsoft_registrator.MySQL
 
         protected const string constring_db4free = "Server=db4free.net; Port=3306; Database=airsoft_rush; Uid=bigroot; Pwd=bigroot";
         protected const string constring_localhost = "server=127.0.0.1; user=root;database=airsoft_rush;port=3306; password=root";
+        protected const string constring_andrew = "server=5.58.21.200; user=viktor;database=airsoft_db;port=3306; password=1234";
 
         public static string MySQLcon()
         {
            
             string output = "";
-            MySqlConnection con = new MySqlConnection(constring_localhost);
+            MySqlConnection con = new MySqlConnection(constring_andrew);
             try
                
             {
@@ -36,7 +37,7 @@ namespace Airsoft_registrator.MySQL
         public static string MySQLquery(string query_in)
         {
 
-            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlConnection con = new MySqlConnection(constring_andrew);
             string output = "";
             string query = "input params and other stuff...";
             query = query_in;
@@ -60,7 +61,7 @@ namespace Airsoft_registrator.MySQL
 
         public static List<String> MySQLselect(string query_in)
         {
-            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlConnection con = new MySqlConnection(constring_andrew);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             List<string> tmp = new List<string>();
             string query = "input params and other stuff...";
@@ -92,7 +93,7 @@ namespace Airsoft_registrator.MySQL
 
         public static string MySQLselect_string(string query_in)
         {
-            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlConnection con = new MySqlConnection(constring_andrew);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             string result;
             string query = "input params and other stuff...";
@@ -116,7 +117,7 @@ namespace Airsoft_registrator.MySQL
 
         public static List<Game> MySQLselect_games(string query_in)
         {
-            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlConnection con = new MySqlConnection(constring_andrew);
             MySqlDataAdapter adapter = new MySqlDataAdapter();
             List<Game> games_info = new List<Game>();
             string query = "input params and other stuff...";
@@ -184,7 +185,7 @@ namespace Airsoft_registrator.MySQL
 
         public static void MySQL_add_registr(int count, string player, string game)
         {
-            MySqlConnection con = new MySqlConnection(constring_db4free);
+            MySqlConnection con = new MySqlConnection(constring_andrew);
             MySqlCommand stored = new MySqlCommand("adding_player", con);
             count++;
             try
@@ -193,6 +194,32 @@ namespace Airsoft_registrator.MySQL
                 stored.Parameters.Add(new MySqlParameter("game", game));
                 stored.Parameters.Add(new MySqlParameter("player", player));
                 stored.Parameters.Add(new MySqlParameter("count_players", count));
+
+                stored.Connection.Open();
+                stored.ExecuteNonQuery();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            finally
+            {
+                stored.Connection.Close();
+            }
+        }
+
+        public static void MySQL_add_game(int players, string location, string name, string _date, string org)
+        {
+            MySqlConnection con = new MySqlConnection(constring_andrew);
+            MySqlCommand stored = new MySqlCommand("adding_new_game", con);
+            try
+            {
+                stored.CommandType = CommandType.StoredProcedure;
+                stored.Parameters.Add(new MySqlParameter("_name", name));
+                stored.Parameters.Add(new MySqlParameter("location", location));
+                stored.Parameters.Add(new MySqlParameter("_date", _date));
+                stored.Parameters.Add(new MySqlParameter("players", players));
+                stored.Parameters.Add(new MySqlParameter("org", org));
 
                 stored.Connection.Open();
                 stored.ExecuteNonQuery();

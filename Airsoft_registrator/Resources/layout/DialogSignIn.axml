@@ -26,7 +26,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="First Name"
+        android:hint="Позивний"
         android:paddingLeft="10dp"
         android:textColor="#000" />
     <TextView
@@ -47,7 +47,7 @@
         android:background="@drawable/editTextStyle"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Password"
+        android:hint="Пароль"
         android:paddingLeft="10dp"
         android:textColor="#000"
         android:layout_below="@id/txtPass" />
@@ -57,7 +57,7 @@
         android:layout_below="@id/txtPasswordIn"
         android:layout_marginTop="50dp">
         <Button
-            android:text="Sign In!"
+            android:text="Авторизуватись!"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btnDialogSignIn"

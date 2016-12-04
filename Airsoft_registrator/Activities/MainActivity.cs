@@ -18,11 +18,10 @@ using Airsoft_registrator.Activities;
 
 namespace Airsoft_registrator
 {
-    [Activity(Label = "Ігри", Icon = "@drawable/icon")]
+    [Activity(Label = "Ігри", Icon = "@drawable/icon", Theme = "@style/MyTheme.Main")]
     public class MainActivity : Activity
     {
         ListView list;
-        TableLayout tl;
         List<Game> games_info;
         public static List<string> players;
 

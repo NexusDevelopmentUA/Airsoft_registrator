@@ -14,7 +14,7 @@ namespace Airsoft_registrator.Activities
 {
     class DialogSignUp:DialogFragment
     {
-        private EditText mTextCallSign, mTextTeam, mPass;
+        private EditText mTextCallSign, mTextTeam, mPass, mCamo;
         private Button mSignUp;
 
         public event EventHandler<OnSignUpEventArgs> mOnSignUpComplete;
@@ -26,8 +26,9 @@ namespace Airsoft_registrator.Activities
             var view = inflater.Inflate(Resource.Layout.DialogSignUp, container, false);
 
             mTextCallSign = view.FindViewById<EditText>(Resource.Id.txtFirstName);
-            mTextTeam = view.FindViewById<EditText>(Resource.Id.txtEmail);
+            mTextTeam = view.FindViewById<EditText>(Resource.Id.txtTEAM);
             mPass = view.FindViewById<EditText>(Resource.Id.txtPassword);
+            mCamo = view.FindViewById<EditText>(Resource.Id.txtCamo);
             mSignUp = view.FindViewById<Button>(Resource.Id.btnDialogEmail);
 
             mSignUp.Click += MSignUp_Click;

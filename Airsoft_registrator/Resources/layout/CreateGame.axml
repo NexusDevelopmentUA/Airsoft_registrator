@@ -9,10 +9,11 @@
     android:minHeight="25px">
     <TextView
         android:id="@+id/txtUpload"
-        android:text="Upload photos"
+        android:text="Додати гру"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="20"
+        android:textSize="25dp"
         android:gravity="center"
         android:textColor="#000" />
     <EditText
@@ -21,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txt_game_name"
         android:background="@drawable/editTextStyle"
-        android:hint="Insert game name here"
+        android:hint="Введіть назву гри"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -37,7 +38,7 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Insert location here"
+        android:hint="Введіть локацію"
         android:textColorHint="#000"
         android:paddingLeft="10dp"
         android:textColor="#000" />
@@ -50,12 +51,12 @@
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:hint="Insert date here"
+        android:hint="Введіть дату"
         android:textColorHint="#000"
         android:paddingLeft="10dp"
         android:textColor="#000" />
     <Button
-        android:text="Add!"
+        android:text="Додати!"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_GameInsert"

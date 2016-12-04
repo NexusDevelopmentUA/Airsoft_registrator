@@ -14,7 +14,7 @@ using Airsoft_registrator.Realm_;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Authorisation")]
+    [Activity(Label = "Авторизація", Theme = "@style/MyTheme.Main")]
     public class Authorisation : Activity
     {
         private Button mButtonSignUp, mButtonSignIn;
@@ -44,11 +44,12 @@ namespace Airsoft_registrator.Activities
             //Знаю, страшний костиль, але нічого краще я не придумав
             var realm = Realm.GetInstance();
             var CurrentUser = realm.All<Realm_user>().Where(d=>d.Status=="LogIn");
+            int count = 0;
             foreach(var val in CurrentUser)
             {
-                
+                count++;
             }
-            if (CurrentUser.Count()!=1)
+            if (CurrentUser.Count()==0)
             {
                 FragmentTransaction transaction = FragmentManager.BeginTransaction();
                 DialogSignIn signinDialog = new DialogSignIn();
@@ -59,6 +60,7 @@ namespace Airsoft_registrator.Activities
 
         private void SignupDialog_mOnSignUpComplete(object sender, OnSignUpEventArgs e)
         {
+
             string query = "INSERT INTO airsoft_rush.players(name,team,camo) VALUES('" + e.Callsign + "','" + e.Team + "','" + e.Team + "')";
             MySQL.MySQL_repository.MySQLquery(query);
         }

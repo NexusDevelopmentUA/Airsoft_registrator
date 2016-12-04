@@ -8,7 +8,7 @@
     android:minWidth="25px"
     android:minHeight="25px">
     <TextView
-        android:text="Create an Account"
+        android:text="Створити аккаунт"
         android:layout_width="match_parent"
         android:layout_weight="20"
         android:layout_height="0dp"

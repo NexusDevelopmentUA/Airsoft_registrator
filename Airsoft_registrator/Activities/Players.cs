@@ -12,7 +12,7 @@ using Android.Widget;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "Players")]
+    [Activity(Label = "Список гравців", Theme = "@style/MyTheme.Main")]
     public class Players : ListActivity
     {
         public List<String> requested_players;

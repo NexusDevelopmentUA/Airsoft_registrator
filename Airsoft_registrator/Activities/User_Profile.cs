@@ -12,7 +12,7 @@ using Android.Views;
 
 namespace Airsoft_registrator.Activities
 {
-    [Activity(Label = "User_Profile", MainLauncher = true)]
+    [Activity(Label = "Профіль користувача", Theme = "@style/MyTheme.Main")]
     public class User_Profile : Activity
     {
         TextView Callsign, Team, Camo;
